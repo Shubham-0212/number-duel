@@ -25,7 +25,7 @@ function now() {
 
 export async function createPrivateMatch(myUid: string, myName: string) {
   const code = genRoomCode10();
-  const match: MatchDoc = {
+  const MatchDoc = {
     mode: "private",
     code,
     status: "waiting",
@@ -37,7 +37,7 @@ export async function createPrivateMatch(myUid: string, myName: string) {
     history: [],
     winnerUid: null,
   };
-  const ref = await addDoc(matchesCol, match as any);
+  const ref = await addDoc(matchesCol, MatchDoc as any);
   return { matchId: ref.id, code };
 }
 
@@ -130,7 +130,7 @@ export async function findOrCreateRandomMatch(myUid: string, myName: string) {
   }
 
   // Else create new waiting random match
-  const match: MatchDoc = {
+  const MatchDoc = {
     mode: "random",
     code: null,
     status: "waiting",
@@ -142,7 +142,7 @@ export async function findOrCreateRandomMatch(myUid: string, myName: string) {
     history: [],
     winnerUid: null,
   };
-  const ref = await addDoc(matchesCol, match as any);
+  const ref = await addDoc(matchesCol, MatchDoc as any);
   return { matchId: ref.id };
 }
 
