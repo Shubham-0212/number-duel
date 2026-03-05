@@ -107,7 +107,8 @@ export async function findOrCreateRandomMatch(myUid: string, myName: string) {
         const data = cur.data() as MatchDoc;
 
         if (data.status !== "waiting") throw new Error("Not waiting");
-        if ((data.playerCount ?? data.players.length) >= 2) throw new Error("Full");
+        const pc = (data as any).playerCount ?? data.players.length;
+        if (pc >= 2) throw new Error("Full");
         if (data.players.some((p) => p.uid === myUid)) return;
 
         const players = [...data.players, { uid: myUid, name: myName }];
